@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SiswaController extends Controller
 {
@@ -20,7 +23,16 @@ class SiswaController extends Controller
 
     public function create(Request $request)
     {
-        \App\Models\Siswa::create($request->all());
+        $user = new \App\Models\User;
+        $user->role = 'siswa';
+        $user->name = $request->nama_depan;
+        $user->email = $request->email;
+        $user->password = bcrypt('rahasia');
+        $user->remember_token = Str::random(60);
+        $user->save();
+
+        $request->request->add(['user_id' => $user->id]);
+        $siswa = \App\Models\Siswa::create($request->all());
         return redirect('/siswa')->with('sukses','Data berhasil di input!');
     }
 

@@ -1,10 +1,5 @@
 @extends('layouts.master')
 @section('content')
-    @if(session('sukses'))
-        <div class="alert alert-success" role="alert">
-            {{session('sukses')}}
-        </div>
-    @endif
     <div class="main">
         <div class="main-content">
             <div class="container-fluid">
@@ -16,6 +11,11 @@
                                 <button type="button" class="btn-remove" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
                             </div>
                         </div>
+                        @if(session('sukses'))
+                            <div class="alert alert-success" role="alert">
+                                {{session('sukses')}}
+                            </div>
+                        @endif
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <thead>
@@ -66,6 +66,11 @@
                                             <div class="form-group">
                                                 <label for="InputNamaBelakang" class="form-label">Masukan Nama Belakang Anda</label>
                                                 <input name="nama_belakang" type="text" class="form-control" id="InputNamaBelakang">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="InputEmail" class="form-label">Masukan Email Anda</label>
+                                                <input name="email" type="email" class="form-control" id="InputEmail">
                                             </div>
 
                                             <div class="form-group">   
